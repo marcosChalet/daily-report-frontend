@@ -32,11 +32,11 @@ export default function App() {
   return (
     <div className="dark:[color-scheme:dark] bg-slate-950 text-slate-300 w-screen h-screen overflow-auto box-border grid grid-rows-[90px_1fr]">
       <header className="w-full px-8 flex justify-start items-center">
-        <p className="text-4xl uppercase font-bold inline-block bg-gradient-to-r from-violet-700 to-red-700 bg-clip-text text-transparent">
+        <p className="text-2xl sm:text-4xl uppercase font-bold inline-block bg-gradient-to-r from-violet-700 to-red-700 bg-clip-text text-transparent">
           To-do App
         </p>
       </header>
-      <main className="container px-16 py-10 m-auto">
+      <main className="container px-4 sm:px-16 py-10 m-auto">
         <section className="flex gap-8 flex-wrap justify-center items-center">
           {toDoLists
             ?.map((list: ToDoListType) => (
@@ -47,7 +47,7 @@ export default function App() {
       </main>
       <button
         onClick={() => setShowModalCreateList(true)}
-        className="absolute p-2 text-4xl bg-gradient-to-r from-rose-600 to-purple-600 rounded-es-xl rounded-se-xl bottom-20 right-20 duration-300 hover:scale-110 hover:cursor-cell"
+        className="absolute p-2 text-3xl sm:text-4xl bg-gradient-to-r from-rose-600 to-purple-600 rounded-es-xl rounded-se-xl bottom-10 sm:bottom-20 right-3 sm:right-5 sm:right-20 duration-300 hover:scale-110 hover:cursor-cell"
       >
         <MdNoteAdd />
       </button>

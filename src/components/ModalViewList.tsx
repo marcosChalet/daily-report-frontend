@@ -33,7 +33,7 @@ export default function ModalViewList({
 
   return (
     <BaseModal>
-      <>
+      <div className="p-3 sm:p-10 max-h-[60vh] sm:max-h-full overflow-auto">
         <h1 className="text-start w-full text-5xl mb-8 uppercase font-bold inline-block bg-gradient-to-r from-rose-600 to-violet-800 bg-clip-text text-transparent">
           {toDoList?.title}
         </h1>
@@ -61,7 +61,7 @@ export default function ModalViewList({
             <BsFillSendPlusFill className="text-slate-400 text-2xl hover:scale-125 duration-300" />
           </button>
         </div>
-      </>
+      </div>
     </BaseModal>
   );
 }

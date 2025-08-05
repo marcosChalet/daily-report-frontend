@@ -26,7 +26,7 @@ export default function ToDoList({
     <div
       onClick={() => selectList(toDoList)}
       key={toDoList.id}
-      className="overflow-hidden relative px-3 bg-slate-800 rounded-md w-72 h-48 flex justify-center items-center duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair"
+      className="overflow-hidden relative px-3 bg-slate-800 rounded-md w-40 h-36 sm:w-72 sm:h-48 flex justify-center items-center duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair"
     >
       <div className="absolute p-1 right-2 top-1 text-2xl text-slate-400 hover:cursor-pointer">
         <BsThreeDots />
@@ -44,7 +44,7 @@ export default function ToDoList({
           }
         `}
       />
-      <h2 className="max-h-36 uppercase font-bold text-3xl text-left flex justify-center items-center flex-wrap bg-gradient-to-r from-rose-600 to-purple-600 bg-clip-text text-transparent">
+      <h2 className="max-h-36 uppercase font-bold text-xl sm:text-3xl text-left flex justify-center items-center flex-wrap bg-gradient-to-r from-rose-600 to-purple-600 bg-clip-text text-transparent">
         #{toDoList.id}
         {` `}
         {toDoList.title}

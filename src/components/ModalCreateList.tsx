@@ -54,8 +54,8 @@ export default function ModalCreateList({
 
   return (
     <BaseModal>
-      <div className="flex flex-col justify-center items-center gap-8">
-        <div className="overflow-hidden relative px-3 bg-slate-800 rounded-md w-72 h-48 flex justify-center items-center duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair">
+      <div className="flex flex-col justify-center items-center gap-y-8 w-full">
+        <div className="relative px-3 bg-slate-800 rounded-md w-56 h-40 sm:w-72 sm:h-48 flex justify-center items-center duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair">
           <div className="absolute p-1 right-2 top-1 text-2xl text-slate-400 hover:cursor-pointer">
             <BsThreeDots />
           </div>
@@ -91,14 +91,14 @@ export default function ModalCreateList({
           </div>
         </div>
 
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center gap-3 w-[500px] text-slate-400">
+        <div className="w-full h-full flex justify-center items-center px-2">
+          <div className="flex flex-col justify-center items-center gap-y-3 w-[100%] sm:w-[500px] text-slate-400">
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               placeholder="título"
-              className="w-full p-2 px-3 rounded-sm bg-slate-800"
+              className="w-full py-2 px-3 rounded-sm bg-slate-800"
             />
             <input
               value={type}
@@ -119,7 +119,7 @@ export default function ModalCreateList({
             <button
               onClick={createList}
               type="submit"
-              className="bg-slate-700 text-lg font-bold uppercase w-full h-12 duration-300 hover:cursor-pointer hover:bg-slate-950"
+              className="bg-slate-700 text-md sm:text-lg font-bold uppercase w-full h-12 duration-300 hover:cursor-pointer hover:bg-slate-950"
             >
               criar
             </button>
