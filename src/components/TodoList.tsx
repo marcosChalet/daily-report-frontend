@@ -26,7 +26,7 @@ export default function TodoList({
     <div
       onClick={() => selectList(todoList)}
       key={todoList.id}
-      className="relative flex h-36 w-40 items-center justify-center overflow-hidden rounded-md bg-slate-800 px-3 duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair sm:h-48 sm:w-72"
+      className="relative flex h-36 w-40 items-center justify-center overflow-hidden rounded-md bg-[#12151f] px-3 duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair sm:h-48 sm:w-72"
     >
       <div className="absolute right-2 top-1 p-1 text-2xl text-slate-400 hover:cursor-pointer">
         <BsThreeDots />

@@ -19,7 +19,7 @@ export default function Todo({
   return (
     <div
       className={`text-md flex min-h-[60px] w-full items-center justify-between px-2 sm:text-lg ${
-        idx % 2 == 0 ? "bg-slate-800" : "bg-slate-700"
+        idx % 2 == 0 ? "bg-gray-900" : "bg-gray-800"
       }`}
     >
       <p>{title}</p>

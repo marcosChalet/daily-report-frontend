@@ -30,14 +30,20 @@ export default function App() {
   }
 
   return (
-    <div className="box-border grid h-screen w-screen grid-rows-[90px_1fr] overflow-auto bg-slate-950 text-slate-300 dark:[color-scheme:dark]">
+    <div className="box-border grid h-screen w-screen grid-rows-[90px_1fr] overflow-auto bg-black text-slate-300 dark:[color-scheme:dark]">
+      <div className="absolute inset-0 mx-10 grid grid-cols-3 divide-x-[1px] divide-[#333]/10 border-x-[1px] border-[#333]/10 md:mx-20 md:grid-cols-4 xl:mx-40">
+        <div />
+        <div />
+        <div />
+        <div className="hidden md:flex" />
+      </div>
       <header className="flex w-full items-center justify-start px-8">
-        <p className="inline-block bg-gradient-to-r from-violet-700 to-red-700 bg-clip-text text-2xl font-bold uppercase text-transparent sm:text-4xl">
+        <p className="inline-block select-none bg-gradient-to-r from-violet-700 to-red-700 bg-clip-text text-2xl font-bold uppercase text-transparent sm:text-4xl">
           Daily Report
         </p>
       </header>
-      <main className="container m-auto px-4 py-10 sm:px-16">
-        <section className="flex flex-wrap items-center justify-center gap-8">
+      <main className="container relative m-auto px-4 py-10 sm:px-16">
+        <section className="z-20 flex flex-wrap items-center justify-center gap-8">
           {todoLists
             ?.map((list: TodoListType) => (
               <TodoList key={list.id} todoList={list} selectList={selectList} />

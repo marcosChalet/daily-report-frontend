@@ -54,7 +54,7 @@ export default function ModalCreateList({
 
   return (
     <BaseModal>
-      <div className="flex w-full flex-col items-center justify-center gap-y-8">
+      <div className="m-auto flex w-full flex-col items-center justify-center gap-y-8">
         <div className="relative flex h-40 w-56 items-center justify-center rounded-md bg-slate-800 px-3 duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair sm:h-48 sm:w-72">
           <div className="absolute right-2 top-1 p-1 text-2xl text-slate-400 hover:cursor-pointer">
             <BsThreeDots />
