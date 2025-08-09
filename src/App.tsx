@@ -33,7 +33,7 @@ export default function App() {
     <div className="box-border grid h-screen w-screen grid-rows-[90px_1fr] overflow-auto bg-slate-950 text-slate-300 dark:[color-scheme:dark]">
       <header className="flex w-full items-center justify-start px-8">
         <p className="inline-block bg-gradient-to-r from-violet-700 to-red-700 bg-clip-text text-2xl font-bold uppercase text-transparent sm:text-4xl">
-          To-do App
+          Daily Report
         </p>
       </header>
       <main className="container m-auto px-4 py-10 sm:px-16">
