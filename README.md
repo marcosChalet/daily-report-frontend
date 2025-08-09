@@ -1,4 +1,4 @@
-# Projeto ToDoList com Spring Boot e React com TypeScript
+# Projeto TodoList com Spring Boot e React com TypeScript
 
 Este é um projeto de uma aplicação Todo List desenvolvida utilizando Spring Boot no backend e React com TypeScript no frontend. A aplicação permite ao usuário criar, visualizar, atualizar e excluir tarefas de listas.
 

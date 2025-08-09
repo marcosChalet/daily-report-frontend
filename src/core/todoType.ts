@@ -1,9 +1,9 @@
-export type ToDoType = {
+export type TodoType = {
   id?: number;
-  toDo: string;
+  todo: string;
 };
 
 export type MutateType = {
   id: number;
-  toDo: ToDoType;
+  todo: TodoType;
 }

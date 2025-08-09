@@ -1,31 +1,44 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { BsFillSendPlusFill } from "react-icons/bs";
-import { MutateType, ToDoType } from "../core/toDoType";
-import ToDo from "./ToDo";
+import { MutateType, TodoType } from "../core/todoType";
+import Todo from "./Todo";
 import BaseModal from "./BaseModal";
-import { ToDoListType } from "../core/toDoListType";
+import { TodoListType } from "../core/todoListType";
 
-import { useToDoDataMutate } from "../hooks/useToDoDataMutate";
+import { useTodoDataMutate } from "../hooks/useTodoDataMutate";
 
 export default function ModalViewList({
-  toDoList,
+  todoList,
 }: {
-  toDoList: ToDoListType | null;
+  todoList: TodoListType | null;
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { mutate } = useToDoDataMutate(toDoList?.title || "");
+  const listRef = useRef<HTMLDivElement | null>(null);
+  const { mutate } = useTodoDataMutate(todoList?.title || "");
+
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [todoList?.todos]);
+
+  function processEvent(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      addTodo();
+    }
+  }
 
   function addTodo() {
-    const toDo = {
-      toDo: inputRef.current?.value ?? "",
+    const todo: TodoType = {
+      todo: inputRef.current?.value ?? "",
     };
 
-    const mutateToDo: MutateType = {
-      id: toDoList?.id ?? -1,
-      toDo,
+    const mutateTodolist: MutateType = {
+      id: todoList?.id ?? -1,
+      todo,
     };
 
-    mutate(mutateToDo);
+    mutate(mutateTodolist);
     if (inputRef.current && inputRef.current.value) {
       inputRef.current.value = "";
     }
@@ -33,32 +46,38 @@ export default function ModalViewList({
 
   return (
     <BaseModal>
-      <div className="p-3 sm:p-10 max-h-[60vh] sm:max-h-full overflow-auto">
-        <h1 className="text-start w-full text-5xl mb-8 uppercase font-bold inline-block bg-gradient-to-r from-rose-600 to-violet-800 bg-clip-text text-transparent">
-          {toDoList?.title}
+      <div className="flex h-full max-h-[60vh] w-full flex-col items-center justify-center overflow-auto sm:max-h-full sm:min-w-[600px]">
+        <h1 className="mb-8 inline-block w-full bg-gradient-to-r from-rose-600 to-violet-800 bg-clip-text text-start text-3xl font-bold uppercase text-transparent md:text-4xl">
+          {todoList?.title && todoList?.title.length > 45
+            ? todoList?.title.slice(0, 45).concat("...")
+            : todoList?.title}
         </h1>
-        <div className="bg-slate-700 rounded-md max-h-96 overflow-y-auto">
-          {toDoList?.toDos?.map((toDoItem: ToDoType, idx: number) => (
-            <ToDo
-              key={toDoItem.id}
+        <div
+          ref={listRef}
+          className="max-h-80 w-full overflow-y-auto rounded-md bg-slate-700"
+        >
+          {todoList?.todos?.map((todoItem: TodoType, idx: number) => (
+            <Todo
+              key={todoItem.id}
               idx={idx}
-              id={toDoItem.id ?? -1}
-              title={toDoItem.toDo}
+              id={todoItem.id ?? -1}
+              title={todoItem.todo}
             />
           ))}
         </div>
-        <div className="flex justify-between items-center mt-5 h-14">
+        <div className="mt-5 flex h-14 w-full items-center justify-between">
           <input
             ref={inputRef}
             type="text"
-            placeholder="digite sua nota"
-            className="bg-transparent text-slate-300 w-full h-full px-2 rounded-r-none rounded-md outline-none border-dashed border-2 border-r-0 border-slate-500 text-lg"
+            placeholder="Algo novo?"
+            onKeyUp={(e) => processEvent(e)}
+            className="min-w-64 h-full min-h-[40px] w-full rounded-md rounded-r-none border-2 border-r-0 border-dashed border-slate-500 bg-transparent px-2 text-lg text-slate-300 outline-none"
           />
           <button
             onClick={addTodo}
-            className="flex items-center justify-center w-12 h-full border-2 border-l-0 border-dashed rounded-l-none rounded-md border-slate-500 pr-2"
+            className="flex h-full w-12 items-center justify-center rounded-md rounded-l-none border-2 border-l-0 border-dashed border-slate-500 pr-2"
           >
-            <BsFillSendPlusFill className="text-slate-400 text-2xl hover:scale-125 duration-300" />
+            <BsFillSendPlusFill className="text-2xl text-slate-400 duration-300 hover:scale-125" />
           </button>
         </div>
       </div>

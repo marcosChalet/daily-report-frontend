@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import BaseModal from "./BaseModal";
-import { TagType, ToDoListType } from "../core/toDoListType";
+import { TagType, TodoListType } from "../core/todoListType";
 
-import { useToDoCreateList } from "../hooks/useListDataCreate";
+import { useTodoCreateList } from "../hooks/useListDataCreate";
 
 export default function ModalCreateList({
   lastId,
@@ -18,7 +18,7 @@ export default function ModalCreateList({
   const [tags, setTags] = useState<string[]>([]);
   const [tag, setTag] = useState<string>("");
 
-  const { mutate: insertList } = useToDoCreateList(title);
+  const { mutate: insertList } = useTodoCreateList();
 
   function addTag(e: React.KeyboardEvent<HTMLInputElement>, currText: string) {
     if (currText === "") return;
@@ -40,11 +40,11 @@ export default function ModalCreateList({
       };
       return tagTmp;
     });
-    const list: ToDoListType = {
+    const list: TodoListType = {
       title,
-      toDoType: type,
+      todoType: type,
       tags: tagList,
-      toDos: [],
+      todos: [],
     };
 
     setId((prev) => prev + 1);
@@ -54,36 +54,34 @@ export default function ModalCreateList({
 
   return (
     <BaseModal>
-      <div className="flex flex-col justify-center items-center gap-y-8 w-full">
-        <div className="relative px-3 bg-slate-800 rounded-md w-56 h-40 sm:w-72 sm:h-48 flex justify-center items-center duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair">
-          <div className="absolute p-1 right-2 top-1 text-2xl text-slate-400 hover:cursor-pointer">
+      <div className="flex w-full flex-col items-center justify-center gap-y-8">
+        <div className="relative flex h-40 w-56 items-center justify-center rounded-md bg-slate-800 px-3 duration-200 hover:translate-x-1 hover:translate-y-2 hover:cursor-crosshair sm:h-48 sm:w-72">
+          <div className="absolute right-2 top-1 p-1 text-2xl text-slate-400 hover:cursor-pointer">
             <BsThreeDots />
           </div>
           <div
-            className={`absolute top-2 left-2 animate-pulse rounded-full w-2 h-2 
-              ${
-                type === 1
-                  ? "bg-sky-500"
-                  : type === 2
+            className={`absolute left-2 top-2 h-2 w-2 animate-pulse rounded-full ${
+              type === 1
+                ? "bg-sky-500"
+                : type === 2
                   ? "bg-yellow-500"
                   : type === 3
-                  ? "bg-green-600"
-                  : "bg-sky-500"
-              }
-            `}
+                    ? "bg-green-600"
+                    : "bg-sky-500"
+            } `}
           />
-          <h2 className="max-h-36 uppercase font-bold text-3xl text-left flex justify-center items-center flex-wrap bg-gradient-to-r from-rose-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="flex max-h-36 flex-wrap items-center justify-center bg-gradient-to-r from-rose-600 to-purple-600 bg-clip-text text-left text-3xl font-bold uppercase text-transparent">
             #{id}
             {` `}
             {title}
           </h2>
-          <div className="flex whitespace-nowrap gap-1 absolute bottom-1 left-1 w-[95%] px-1 overflow-x-clip">
+          <div className="absolute bottom-1 left-1 flex w-[95%] gap-1 overflow-x-clip whitespace-nowrap px-1">
             {tags.map((tag: string) => (
-              <p key={tag} className="text-xs text-slate-500 min-w-fit">
+              <p key={tag} className="min-w-fit text-xs text-slate-500">
                 <strong>#{tag.replaceAll(" ", "-")}</strong>
               </p>
             ))}
-            <p className="text-xs text-slate-500 min-w-fit">
+            <p className="min-w-fit text-xs text-slate-500">
               <strong>
                 {tag && `#${tag.trimStart().replaceAll(" ", "-")}`}
               </strong>
@@ -91,35 +89,35 @@ export default function ModalCreateList({
           </div>
         </div>
 
-        <div className="w-full h-full flex justify-center items-center px-2">
-          <div className="flex flex-col justify-center items-center gap-y-3 w-[100%] sm:w-[500px] text-slate-400">
+        <div className="flex h-full w-full items-center justify-center px-2">
+          <div className="flex w-[100%] flex-col items-center justify-center gap-y-3 text-slate-400 sm:w-[500px]">
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               placeholder="título"
-              className="w-full py-2 px-3 rounded-sm bg-slate-800"
+              className="w-full rounded-sm bg-slate-800 px-3 py-2"
             />
             <input
               value={type}
               onChange={(e) => changeType(+e.target.value)}
               type="number"
               placeholder="tipo"
-              className="w-full p-2 px-3 rounded-sm bg-slate-800"
+              className="w-full rounded-sm bg-slate-800 p-2 px-3"
             />
             <input
               value={tag}
               onChange={(e) => setTag(e.target.value.trimStart())}
               type="text"
               placeholder="tag"
-              className="w-full p-2 px-3 rounded-sm bg-slate-800"
+              className="w-full rounded-sm bg-slate-800 p-2 px-3"
               onKeyUp={(e) => addTag(e, tag)}
             />
 
             <button
               onClick={createList}
               type="submit"
-              className="bg-slate-700 text-md sm:text-lg font-bold uppercase w-full h-12 duration-300 hover:cursor-pointer hover:bg-slate-950"
+              className="text-md h-12 w-full bg-slate-700 font-bold uppercase duration-300 hover:cursor-pointer hover:bg-slate-950 sm:text-lg"
             >
               criar
             </button>

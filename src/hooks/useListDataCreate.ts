@@ -1,22 +1,21 @@
 import axios, { AxiosPromise } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ToDoListType } from "../core/toDoListType";
+import { TodoListType } from "../core/todoListType";
 
-const apiCreateListUrl = `${import.meta.env.VITE_API_URL}/lists/create`
+const apiCreateListUrl = `${import.meta.env.VITE_API_URL}/todolists`
 
-async function createList(data: ToDoListType): AxiosPromise<ToDoListType> {
-  console.log("Log:", apiCreateListUrl)
+async function createList(data: TodoListType): AxiosPromise<TodoListType> {
   const response = await axios.post(apiCreateListUrl, data);
   return response;
 }
 
-export function useToDoCreateList(title: string) {
+export function useTodoCreateList() {
     const queryClient = useQueryClient()
     const mutate = useMutation({
       mutationFn: createList,
       retry: 2,
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["toDo-data"])
+        await queryClient.invalidateQueries(["todolists-data"])
       }
     });
   
