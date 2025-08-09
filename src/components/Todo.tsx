@@ -18,11 +18,11 @@ export default function Todo({
 
   return (
     <div
-      className={`text-md flex h-16 w-full items-center justify-between px-2 sm:text-lg ${
+      className={`text-md flex min-h-[60px] w-full items-center justify-between px-2 sm:text-lg ${
         idx % 2 == 0 ? "bg-slate-800" : "bg-slate-700"
       }`}
     >
-      <p className="overflow-x-hidden whitespace-nowrap">{title}</p>
+      <p>{title}</p>
       <div className="ml-1 flex items-center gap-1">
         <button
           onClick={deletefn}
