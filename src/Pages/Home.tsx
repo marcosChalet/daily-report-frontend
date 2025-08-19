@@ -51,7 +51,7 @@ export default function Home() {
               key={list.id}
               todoList={list}
               selectList={selectList}
-              index={idx + 1}
+              index={todoLists.length - idx}
             />
           ))}
         </section>
