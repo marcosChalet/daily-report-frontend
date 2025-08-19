@@ -2,7 +2,8 @@ import axios, { AxiosPromise } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseGet } from "../core/todoListType";
 
-const apiFetchTodoUrl = `${import.meta.env.VITE_API_URL}/todolists`
+// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+const apiFetchTodoUrl = `${import.meta.env.VITE_API_URL}/reports?sort=updatedAt,desc`;
 
 async function fetchTodos(): AxiosPromise<ResponseGet> {
   const response = await axios.get(apiFetchTodoUrl);
@@ -12,12 +13,12 @@ async function fetchTodos(): AxiosPromise<ResponseGet> {
 export function useTodoDataGet() {
   const query = useQuery({
     queryFn: fetchTodos,
-    queryKey: ["todolists-data"],
+    queryKey: ["@dailyReport-report-data"],
     retry: 2,
   });
 
   return {
     ...query,
-    data: query.data?.data?._embedded?.todolists,
+    data: query.data?.data?._embedded?.reportResponseList,
   };
 }

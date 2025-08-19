@@ -2,8 +2,8 @@ import { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import BaseModal from "./BaseModal";
 import { TagType, TodoListType } from "../core/todoListType";
-
 import { useTodoCreateList } from "../hooks/useListDataCreate";
+import { ALL_WHITE_SPACES } from "../constraints/validationConstraints";
 
 export default function ModalCreateList({
   lastId,
@@ -20,10 +20,15 @@ export default function ModalCreateList({
 
   const { mutate: insertList } = useTodoCreateList();
 
-  function addTag(e: React.KeyboardEvent<HTMLInputElement>, currText: string) {
-    if (currText === "") return;
+  function normalizeTagValue(tag: string) {
+    return tag.trimStart().replaceAll(ALL_WHITE_SPACES, "-");
+  }
+
+  function addTag(e: React.KeyboardEvent<HTMLInputElement>, tag: string) {
+    const normalizedtag = normalizeTagValue(tag);
+    if (normalizedtag === "") return;
     if (e.key === "Enter") {
-      setTags((prev: string[]) => [...prev, currText]);
+      setTags((prev: string[]) => [...prev, normalizedtag]);
       setTag("");
     }
   }
@@ -36,15 +41,15 @@ export default function ModalCreateList({
   function createList() {
     const tagList: TagType[] = tags.map((tag: string) => {
       const tagTmp: TagType = {
-        name: tag,
+        value: tag,
       };
       return tagTmp;
     });
     const list: TodoListType = {
       title,
-      todoType: type,
+      type: type,
       tags: tagList,
-      todos: [],
+      tasks: [],
     };
 
     setId((prev) => prev + 1);
@@ -78,13 +83,11 @@ export default function ModalCreateList({
           <div className="absolute bottom-1 left-1 flex w-[95%] gap-1 overflow-x-clip whitespace-nowrap px-1">
             {tags.map((tag: string) => (
               <p key={tag} className="min-w-fit text-xs text-slate-500">
-                <strong>#{tag.replaceAll(" ", "-")}</strong>
+                <strong>#{normalizeTagValue(tag)}</strong>
               </p>
             ))}
             <p className="min-w-fit text-xs text-slate-500">
-              <strong>
-                {tag && `#${tag.trimStart().replaceAll(" ", "-")}`}
-              </strong>
+              <strong>{tag && `#${normalizeTagValue(tag)}`}</strong>
             </p>
           </div>
         </div>

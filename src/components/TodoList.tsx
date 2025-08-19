@@ -1,27 +1,15 @@
 import { BsThreeDots } from "react-icons/bs";
 import { TagType, TodoListType } from "../core/todoListType";
-import { useEffect, useState } from "react";
 
 export default function TodoList({
   todoList,
   selectList,
+  index,
 }: {
   todoList: TodoListType;
   selectList: (item: TodoListType) => void;
+  index: number;
 }) {
-  const [isAvaliable, setIsAvaliable] = useState(false);
-
-  useEffect(() => {
-    setIsAvaliable(true);
-  }, []);
-
-  useEffect(() => {
-    if (isAvaliable) {
-      selectList(todoList);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [todoList]);
-
   return (
     <div
       onClick={() => selectList(todoList)}
@@ -33,24 +21,24 @@ export default function TodoList({
       </div>
       <div
         className={`absolute left-2 top-2 h-2 w-2 animate-pulse rounded-full ${
-          todoList.todoType === 1
+          todoList.type === 1
             ? "bg-sky-500"
-            : todoList.todoType === 2
+            : todoList.type === 2
               ? "bg-yellow-500"
-              : todoList.todoType === 3
+              : todoList.type === 3
                 ? "bg-green-600"
                 : "bg-sky-500"
         } `}
       />
       <h2 className="flex max-h-36 flex-wrap items-center justify-center bg-gradient-to-r from-rose-600 to-purple-600 bg-clip-text text-left text-xl font-bold uppercase text-transparent sm:text-3xl">
-        #{todoList.id}
+        #{index}
         {` `}
         {todoList.title}
       </h2>
       <div className="absolute bottom-1 left-1 flex w-[95%] gap-1 overflow-x-clip whitespace-nowrap px-1">
         {todoList.tags.map((tag: TagType) => (
           <p key={tag.id} className="min-w-fit text-xs text-slate-500">
-            <strong>#{tag.name.replaceAll(" ", "-")}</strong>
+            <strong>#{tag.value}</strong>
           </p>
         ))}
       </div>

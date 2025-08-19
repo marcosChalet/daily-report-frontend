@@ -3,17 +3,22 @@ import { useTodoDataDelete } from "../hooks/useTodoDataDelete";
 
 export default function Todo({
   idx,
-  id,
+  taskId,
+  reportId,
   title,
 }: {
   idx: number;
-  id: number;
+  taskId: number;
   title: string;
+  reportId: number;
 }) {
   const { mutate: mutateDelete } = useTodoDataDelete();
 
   function deletefn() {
-    mutateDelete(id);
+    mutateDelete({
+      reportId,
+      taskId,
+    });
   }
 
   return (

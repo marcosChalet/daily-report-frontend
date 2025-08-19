@@ -20,7 +20,7 @@ export default function ModalViewList({
     if (listRef.current) {
       listRef.current.scrollTop = listRef.current.scrollHeight;
     }
-  }, [todoList?.todos]);
+  }, [todoList?.tasks]);
 
   function processEvent(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
@@ -30,12 +30,12 @@ export default function ModalViewList({
 
   function addTodo() {
     const todo: TodoType = {
-      todo: inputRef.current?.value ?? "",
+      value: inputRef.current?.value ?? "",
     };
 
     const mutateTodolist: MutateType = {
       id: todoList?.id ?? -1,
-      todo,
+      tasks: todo,
     };
 
     mutate(mutateTodolist);
@@ -56,12 +56,13 @@ export default function ModalViewList({
           ref={listRef}
           className="max-h-80 w-full overflow-y-auto rounded-md bg-slate-700"
         >
-          {todoList?.todos?.map((todoItem: TodoType, idx: number) => (
+          {todoList?.tasks?.map((todoItem: TodoType, idx: number) => (
             <Todo
               key={todoItem.id}
               idx={idx}
-              id={todoItem.id ?? -1}
-              title={todoItem.todo}
+              taskId={todoItem.id ?? -1}
+              reportId={todoList.id ?? -1}
+              title={todoItem.value}
             />
           ))}
         </div>

@@ -1,26 +1,24 @@
 import { TodoType } from "./todoType";
 
 export interface TagType {
-  id?: number,
-  name: string,
+  id: number;
+  value: string;
 }
 
-type LinksType = 
-  | { todos: { href: string } }
-  | { self: { href: string } };
+type LinksType = { todos: { href: string } } | { self: { href: string } };
 
 export type ResponseGet = {
   _embedded: {
-    todolists: [TodoListType];
-  }
+    reportResponseList: [TodoListType];
+  };
   _links: LinksType;
-}
+};
 
 export type TodoListType = {
-  id?: number;
+  id: number;
   title: string;
-  todoType: number;
+  type: number;
   tags: TagType[];
-  todos: TodoType[];
-  _links?: LinksType
+  tasks: TodoType[];
+  _links?: LinksType;
 };
